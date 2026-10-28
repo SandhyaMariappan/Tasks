@@ -1,0 +1,167 @@
+<main class="todo-page">
+  <section class="todo-card">
+    <header class="page-header">
+      <div class="brand-icon" >✓</div>
+
+      <div>
+        <h1>My Tasks</h1>
+        <p class="subtitle">Small steps lead to big achievements.</p>
+      </div>
+    </header>
+
+    <section class="stats" >
+      <div class="stat-item">
+        <span class="stat-label">Total tasks</span>
+        <strong>{{ todoService.totalCount() }}</strong>
+      </div>
+
+      <div class="stat-item">
+        <span class="stat-label">Completed</span>
+        <strong>{{ todoService.completedCount() }}</strong>
+      </div>
+
+      <div class="stat-item">
+        <span class="stat-label">Remaining</span>
+        <strong>{{ todoService.remainingCount() }}</strong>
+      </div>
+    </section>
+
+    <form class="add-form" (ngSubmit)="addTask()">
+      <input
+        id="new-task"
+        name="newTitle"
+        type="text"
+        placeholder="What needs to get done?"
+        autocomplete="off"
+        [(ngModel)]="newTitle"
+      />
+      <button class="add-button" type="submit">Add task</button>
+    </form>
+
+    <section class="task-section">
+      <div class="list-header">
+        <h2>Task list</h2>
+
+        <button
+          type="button"
+          class="clear-button"
+          [disabled]="todoService.completedCount() === 0"
+          (click)="todoService.clearCompleted()"
+        > Clear completed </button>
+      </div>
+
+      <nav class="filters">
+        <button
+          type="button"
+          [class.active-filter]="todoService.filter() === 'all'"
+          (click)="todoService.setFilter('all')"
+        > All </button>
+
+        <button
+          type="button"
+          [class.active-filter]="todoService.filter() === 'active'"
+          (click)="todoService.setFilter('active')"
+        > Active </button>
+
+        <button
+          type="button"
+          [class.active-filter]="todoService.filter() === 'completed'"
+          (click)="todoService.setFilter('completed')"
+        >  Completed </button>
+      </nav>
+
+      @if (todoService.todos().length === 0) {
+        <div class="empty-state">
+          <div class="empty-icon" >☑</div>
+          <h3>Your list is clear</h3>
+          <p>Add your first task above and get started.</p>
+        </div>
+      } @else if (todoService.filteredTodos().length === 0) {
+        <div class="empty-state">
+          <div class="empty-icon">⌕</div>
+          <h3>No matching tasks</h3>
+          <p>There are no tasks in this filter yet.</p>
+        </div>
+      } @else {
+        <ul class="task-list">
+          @for (todo of todoService.filteredTodos(); track todo.id) {
+            <li class="task-row">
+              <input
+                class="task-checkbox"
+                type="checkbox"
+                [id]="'task-' + todo.id"
+                [checked]="todo.done" 
+                (change)="todoService.toggleTodo(todo.id)"
+              />
+              <!--changing between editing mode and normal mode-->
+              @if (editingId === todo.id) {
+                <form class="edit-form" (ngSubmit)="saveEdit(todo.id)" >
+                  <input
+                    class="edit-input"
+                    [id]="'edit-' + todo.id"
+                    [name]="'editTitle-' + todo.id"
+                    type="text"
+                    [(ngModel)]="editTitle"
+                    (keydown.escape)="cancelEditing()"
+                    autofocus
+                  />
+
+                  <button
+                    class="icon-button save-button"
+                    type="submit"
+                    title="Save"
+                    [disabled]="!editTitle.trim()" 
+                  >  ✓   </button>
+
+                  <button
+                    class="icon-button"
+                    type="button"
+                    title="Cancel"
+                    (click)="cancelEditing()"
+                  >   ×   </button>
+                </form>
+              } @else {
+                <label
+                  class="task-title"
+                  [class.done]="todo.done"
+                  (dblclick)="startEditing(todo)"
+                  (keydown.enter)="startEditing(todo)"
+                  title="Double-click to edit"
+                >  {{ todo.title }}  </label>
+
+                <div class="task-actions">
+                  <button
+                    class="icon-button"
+                    type="button"
+                    title="Edit task"
+                    (click)="startEditing(todo)"
+                  >  ✎    </button>
+
+                  <button
+                    class="icon-button delete-button"
+                    type="button"
+                    title="Delete task"
+                    (click)="deleteTask(todo.id)"
+                  >   ×  </button>
+                </div>
+              }
+            </li>
+          }
+        </ul>
+      }
+    </section>
+
+    <footer class="page-footer">
+      @if (todoService.remainingCount() === 0 && todoService.totalCount() > 0) {
+        <span>All caught up. Nice work!</span>
+      } @else {
+        <span>
+          {{ todoService.remainingCount() }}
+          {{ todoService.remainingCount() === 1 ? 'task' : 'tasks' }}
+          left to complete
+        </span>
+      }
+
+    </footer>
+  </section>
+</main>
