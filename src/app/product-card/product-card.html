@@ -1,0 +1,12 @@
+<article class="product-card">
+  <img class="product-image"
+    [src]="image() || 'https://placehold.co/300x200?text=Product'"
+    [alt]="name()"
+  />
+  <div class="product-details">
+    <h2>{{ name() }}</h2>
+    <p class="product-price">{{ price() | currency: 'INR' : 'symbol' : '1.2-2' }}</p>
+    <button type="button" (click)="onAddToCart()">Add to cart</button>
+  </div>
+</article>
+

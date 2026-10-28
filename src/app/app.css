@@ -1,0 +1,133 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  width: 100%;
+  background: #f6f4ef;
+  color: #242820;
+  font-family: Inter, "Segoe UI", Arial, sans-serif;
+}
+
+/* Header */
+.site-header {
+  background: #354635;
+  color: #fffdf7;
+}
+
+.header-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 32px 24px;
+}
+
+.brand {
+  margin: 0 0 12px;
+  color: #e8c7a7;
+  font-size:  clamp(30px, 4vw, 46px);
+  font-weight: 750;
+  letter-spacing: 2.5px;
+}
+
+.site-header h1 {
+  max-width: 760px;
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -1.5px;
+  line-height: 1;
+}
+
+.page {
+  max-width: 1240px;
+  min-height: 360px;
+  margin: 0 auto;
+  padding: 20px 32px 64px;
+}
+
+.page-header {
+  position: relative;
+  margin-bottom: 36px;
+  padding: 24px 0 22px;
+  border-bottom: 1px solid #e2ded5;
+}
+
+.page-header::before {
+  display: inline-block;
+  margin-bottom: 12px;
+  color: #9b6845;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2.4px;
+}
+
+.page-header h1 {
+  margin: 0;
+  color: #242820;
+  font-size: clamp(20px, 4vw, 35px);
+  font-weight: 750;
+  letter-spacing: -1.5px;
+  line-height: 1.2;
+}
+
+.page-header p {
+  margin: 12px 0 0;
+  color: #121202;
+  font-size: 15px;
+  line-height: 1.7;
+}
+/* 77776e */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: stretch;
+  gap: 24px;
+  padding-top: 8px;
+}
+
+.status-message {
+  margin: 0 0 24px;
+  padding: 14px 18px;
+  border: 1px solid #c7d5c2;
+  border-radius: 9px;
+  background: #eaf0e5;
+  color: #36553b;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.empty-message {
+  padding: 40px 20px;
+  color: #77776e;
+  text-align: center;
+  font-size: 15px;
+}
+
+@media (max-width: 850px) {
+  .page {
+    padding: 32px 24px 48px;
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+  }
+}
+
+@media (max-width: 540px) {
+  .page {
+    padding: 22px 16px 36px;
+  }
+
+  .page-header {
+    margin-bottom: 26px;
+    padding-top: 20px;
+  }
+
+  .page-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .product-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}

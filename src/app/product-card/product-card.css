@@ -1,0 +1,123 @@
+:host {
+  display: block;
+  width: 100%;
+  max-width: 320px;
+  height: 100%;
+  margin: 0 auto;
+}
+
+.product-card {
+  height: 100%;
+  overflow: hidden;
+  border: 1px solid #e8e4db;
+  border-radius: 12px;
+  background: #fffefa;
+  box-shadow: 0 3px 10px rgb(39 36 27 / 3%);
+  transition:
+    transform 220ms ease,
+    box-shadow 220ms ease,
+    border-color 220ms ease;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  border-color: #d7d0c2;
+  box-shadow: 0 14px 26px rgb(39 36 27 / 8%);
+}
+
+.product-image {
+  display: block;
+  width: 100%;
+  height: 175px;
+  padding: 10px;
+  box-sizing: border-box;
+  object-fit: contain;
+  background: #efede7;
+  transition: transform 300ms ease;
+}
+
+.product-card:hover .product-image {
+  transform: scale(1.035);
+}
+
+.product-details {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 10px;
+  padding: 16px;
+}
+
+.product-details h2 {
+  margin: 0;
+  color: #292c25;
+  font-size: 17px;
+  font-weight: 650;
+  letter-spacing: -0.25px;
+  line-height: 1.4;
+}
+
+.product-price {
+  margin: 0;
+  color: #526647;
+  font-size: 20px;
+  font-weight: 750;
+  letter-spacing: -0.4px;
+}
+
+button {
+  width: 100%;
+  margin-top: 3px;
+  padding: 11px 14px;
+  border: 1px solid #354635;
+  border-radius: 7px;
+  background: #354635;
+  color: #fffdf7;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 650;
+  letter-spacing: 0.2px;
+  cursor: pointer;
+  transition:
+    background 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
+}
+
+button:hover {
+  border-color: #253526;
+  background: #253526;
+}
+
+button:active {
+  transform: scale(0.985);
+}
+
+button:focus-visible {
+  outline: 3px solid #b9c7a9;
+  outline-offset: 3px;
+}
+
+@media (max-width: 540px) {
+  .product-image {
+    height: 190px;
+  }
+
+  .product-details {
+    padding: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .product-card,
+  .product-image,
+  button {
+    transition: none;
+  }
+
+  .product-card:hover,
+  .product-card:hover .product-image,
+  button:active {
+    transform: none;
+  }
+}
